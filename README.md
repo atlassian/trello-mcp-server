@@ -7,7 +7,25 @@
 
 <h1 align="center">Trello MCP Server</h1>
 
-Trello MCP (Model Context Protocol) is a cloud-based bridge between your Trello account and compatible external AI assistants. Once configured, it lets those tools interact with your Trello boards, cards, and tasks using natural language.
+<p align="center">
+  <b>The official Model Context Protocol (MCP) server for Trello: a cloud-hosted bridge that gives your AI tools secure, real-time access to your Trello content, including boards, lists, cards, checklists, etc.</b>
+</p>
+
+<!-- Line 1 · Project -->
+<p align="center">
+  <a href="https://github.com/atlassian/trello-mcp-server"><img src="https://img.shields.io/badge/Official-Trello-1558BC?logo=trello&logoColor=white" alt="Official Trello Server"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/atlassian/trello-mcp-server?label=License&color=1558BC" alt="License: Apache 2.0"></a>
+  <a href="https://github.com/atlassian/trello-mcp-server"><img src="https://img.shields.io/badge/Status-Available-2EBC4F" alt="Status: Available"></a>
+</p>
+
+<!-- Line 2 · Protocol & access -->
+<p align="center">
+  <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/Model_Context_Protocol-compatible-000000?logo=modelcontextprotocol&logoColor=white" alt="Model Context Protocol compatible"></a>
+  <a href="#data-and-security"><img src="https://img.shields.io/badge/Auth-OAuth_2.0-2EBC4F" alt="Auth: OAuth 2.0"></a>
+  <a href="https://www.atlassian.com/cloud"><img src="https://img.shields.io/badge/Hosting-Atlassian_Cloud-1558BC?logo=atlassian&logoColor=white" alt="Hosting: Atlassian Cloud"></a>
+</p>
+
+The official Trello MCP (Model Context Protocol) is a cloud-based bridge between your Trello account and compatible external AI assistants. Once configured, it lets those tools interact with your Trello boards, cards, and tasks using natural language.
 
 With Trello MCP, you can manage work without constantly switching between apps. Your AI assistant can read Trello data, search across it, and take actions on your behalf based on the permissions you grant.
 
