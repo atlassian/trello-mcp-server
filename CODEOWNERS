@@ -1,0 +1,4 @@
+# Global code owners for the Trello MCP Server repository
+# These users will be automatically requested for review on all pull requests
+
+* @atlassian-jinhuanlei @atlassian-sarveshsadhoo @atllitskevitch @ccanoy-atl @dtbatlassian @rsu2-stack
