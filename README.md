@@ -8,7 +8,7 @@
 <h1 align="center">Trello MCP Server</h1>
 
 <p align="center">
-  <b>The official Model Context Protocol (MCP) server for Trello: a cloud-hosted bridge that gives your AI tools secure, real-time access to your Trello content, including boards, lists, cards, checklists, etc.</b>
+  <b>The official Model Context Protocol (MCP) server for Trello: a cloud-hosted bridge that gives your AI tools secure, real-time access to your Trello content, including boards, lists, cards, checklists and more.</b>
 </p>
 
 <!-- Line 1 · Project -->
@@ -35,7 +35,7 @@ With Trello MCP, you can manage work without constantly switching between apps. 
 
 Trello MCP supports any app with MCP support, including:
 
-* [OpenAI ChatGPT](https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt)
+* [OpenAI ChatGPT](https://chatgpt.com/apps/trello/asdk_app_6a20b18a639081918c1b438f8381b27e)
 * [Claude](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)
 * [Cursor](https://cursor.com/docs/mcp#installing-mcp-servers)
 * [Visual Studio Code](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server)
@@ -55,7 +55,9 @@ Ensure your environment meets the necessary requirements to successfully connect
 
 ## How to connect
 
-**Coming soon:** Direct Trello MCP listing in **ChatGPT** and **Claude** are coming soon. Listing on other AI platform marketplaces may become available over time. Until then, you can connect by manually adding the MCP URL in your AI client.
+**For ChatGPT users:** Add Trello MCP directly from our listing page [here](https://chatgpt.com/apps/trello/asdk_app_6a20b18a639081918c1b438f8381b27e).
+
+Direct Trello MCP listing in **Claude** is coming soon. Listing on other AI platform marketplaces may become available over time. Until then, you can connect by manually adding the MCP URL in your AI client.
 
 1. Add the Trello MCP server URL to your AI client's MCP settings: `https://mcp.trello.com/v1`
 2. Start the connection flow from your AI client.
