@@ -55,9 +55,11 @@ Ensure your environment meets the necessary requirements to successfully connect
 
 ## How to connect
 
-**For ChatGPT users:** Add Trello MCP directly from our listing page [here](https://chatgpt.com/apps/trello/asdk_app_6a20b18a639081918c1b438f8381b27e).
+**For ChatGPT users:** Add Trello MCP from our [listing page](https://chatgpt.com/apps/trello/asdk_app_6a20b18a639081918c1b438f8381b27e).
 
-Direct Trello MCP listing in **Claude** is coming soon. Listing on other AI platform marketplaces may become available over time. Until then, you can connect by manually adding the MCP URL in your AI client.
+**For Claude users:** Add Trello MCP from our [listing page](https://claude.ai/directory/connectors/trello).
+
+Listing on other AI platform marketplaces may become available over time. Until then, you can connect by manually adding the MCP URL in your AI client.
 
 1. Add the Trello MCP server URL to your AI client's MCP settings: `https://mcp.trello.com/v1`
 2. Start the connection flow from your AI client.
