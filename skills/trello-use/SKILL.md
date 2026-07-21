@@ -10,7 +10,7 @@ Trello MCP tools are action-dispatched (`action: "..."` selects the operation) a
 
 ## 1. Identify the current user first
 
-Call `trelloReadMember` with `action: "get_me"` to get the authenticated user's profile, including `prefs.timezone`. Do this before any relative-time request ("today", "this week") for cards, Inbox, and search. (Planner events use a different timezone source — see §3.)
+Call `trelloReadMember` with `action: "get_me"` to get the authenticated user's profile, including `prefs.timezone`. Do this before any relative-time request ("today", "this week") for cards, Inbox, and search — most concretely, before `trelloWriteCard`/`trelloWriteInbox` `create` or `update` when the user gives a `due` date/time in local or relative terms (e.g. "tomorrow 1pm"): resolve `prefs.timezone` first, convert to UTC, then pass that as `due`. (Planner events use a different timezone source — see §3.)
 
 ## 2. ARI id format (critical — read before passing any id)
 

@@ -70,7 +70,7 @@ Listing on other AI platform marketplaces may become available over time. Until 
 
 ## Agent skill
 
-This repo ships a [`trello-use`](skills/trello-use/SKILL.md) agent skill that teaches AI coding agents how to call the Trello MCP tools correctly — the ARI id format every tool expects, UTC date handling, Inbox vs. board tools, and ordered creation. Loading it up front avoids common malformed-id and timezone errors.
+This repo ships a [`trello-use`](skills/trello-use/SKILL.md) agent skill that guides AI agents on how to call the Trello MCP tools correctly — the ARI id format every tool expects, UTC date handling, Inbox vs. board tools, and ordered creation. Loading it up front avoids common malformed-id and timezone errors.
 
 Install it with the [`skills`](https://github.com/vercel-labs/skills) CLI:
 
