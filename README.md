@@ -59,6 +59,8 @@ Ensure your environment meets the necessary requirements to successfully connect
 
 **For Claude users:** Add Trello MCP from our [listing page](https://claude.ai/directory/connectors/trello).
 
+**For Cursor users:** Click this [deeplink](https://cursor.com/install-mcp?name=trello&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vbWNwLnRyZWxsby5jb20vdjEifQ==) to open Cursor and prompt you to install Trello MCP.
+
 Listing on other AI platform marketplaces may become available over time. Until then, you can connect by manually adding the MCP URL in your AI client.
 
 1. Add the Trello MCP server URL to your AI client's MCP settings: `https://mcp.trello.com/v1`
@@ -156,7 +158,6 @@ Trello MCP is actively being developed. The current release includes core tools 
 | **Cards**              | Copy cards                                            |
 | **Members**            | View and manage board, workspace, and card members    |
 | **Planner**            | View events linked to specific cards                  |
-| **Workspaces**         | Create workspace                                      |
 
 We'll update this page as new capabilities become available.
 
