@@ -70,6 +70,22 @@ Listing on other AI platform marketplaces may become available over time. Until 
 
 **Tip:** If you later want to use a feature that requires a permission you did not grant, disconnect Trello MCP and reconnect it with the updated permissions.
 
+## Agent skill
+
+This repo ships a [`trello-use`](skills/trello-use/SKILL.md) agent skill that guides AI agents on how to call the Trello MCP tools correctly — the ARI id format every tool expects, UTC date handling, Inbox vs. board tools, and ordered creation. Loading it up front avoids common malformed-id and timezone errors.
+
+Install it with the [`skills`](https://github.com/vercel-labs/skills) CLI:
+
+```bash
+# Install the trello-use skill from this repo
+npx skills install atlassian/trello-mcp-server
+
+# Or install globally (available to all your projects)
+npx skills install atlassian/trello-mcp-server -g
+```
+
+The CLI detects your agent (Claude Code, Cursor, and others) and installs the skill where that agent looks for it.
+
 ## Data and security
 
 * **Authentication** - Trello MCP uses OAuth 2.0 for secure authentication and access control.
