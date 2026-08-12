@@ -111,6 +111,7 @@ Trello MCP is actively being developed. The current release includes core tools 
 
 | Category                     | What's coming                                         |
 | ---------------------------- | ----------------------------------------------------- |
+| **Workspaces**         | Select and connect multiple Trello workspaces         |
 | **Activity & History** | View action history for cards, lists, and boards      |
 | **Comments**           | View, add, and edit comments on cards                 |
 | **Attachments**        | View, upload, and download card attachments           |
