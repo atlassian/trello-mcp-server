@@ -14,6 +14,7 @@
 <!-- Line 1 · Project -->
 <p align="center">
   <a href="https://github.com/atlassian/trello-mcp-server"><img src="https://img.shields.io/badge/Official-Trello-1558BC?logo=trello&logoColor=white" alt="Official Trello Server"></a>
+  <a href="https://github.com/atlassian/trello-mcp-server/stargazers"><img src="https://img.shields.io/github/stars/atlassian/trello-mcp-server?style=flat&logo=github&label=Stars&color=1558BC" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/atlassian/trello-mcp-server?label=License&color=1558BC" alt="License: Apache 2.0"></a>
   <a href="https://github.com/atlassian/trello-mcp-server"><img src="https://img.shields.io/badge/Status-Available-2EBC4F" alt="Status: Available"></a>
 </p>
@@ -86,6 +87,42 @@ npx skills install atlassian/trello-mcp-server -g
 
 The CLI detects your agent (Claude Code, Cursor, and others) and installs the skill where that agent looks for it.
 
+## Supported capabilities
+
+| Category             | What you can do                                                                    |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| **Member**     | View your profile and defaults                                                     |
+| **Workspaces** | View workspace details                                                             |
+| **Boards**     | View and create boards; view labels                                                |
+| **Lists**      | View and move lists                                                                |
+| **Cards**      | View, create, update, move, archive, and mark cards done; attach and detach labels |
+| **Checklists** | View, create, and update checklists; add and update checklist items                |
+| **Search**     | Search for cards and boards by keyword                                             |
+| **Planner**    | View calendar events; create focus-time events; link and unlink cards to events    |
+| **Inbox**      | View, create, update, and archive Inbox cards                                      |
+
+**Planner and focus time**
+
+Users can connect their Google or Outlook calendar to Planner to read calendar events. However, creating focus time in Planner requires Trello Premium or enterprise.
+
+## More capabilities coming soon
+
+Trello MCP is actively being developed. The current release includes core tools for managing boards, lists, cards, checklists, and search. Additional tools are planned for upcoming releases to expand what your AI assistant can do with Trello:
+
+| Category                     | What's coming                                         |
+| ---------------------------- | ----------------------------------------------------- |
+| **Activity & History** | View action history for cards, lists, and boards      |
+| **Comments**           | View, add, and edit comments on cards                 |
+| **Attachments**        | View, upload, and download card attachments           |
+| **Custom Fields**      | View field definitions; get and set values on cards   |
+| **Labels**             | Create, view, and update labels                       |
+| **Boards**             | Edit board details (name, visibility); archive boards |
+| **Cards**              | Copy cards                                            |
+| **Members**            | View and manage board, workspace, and card members    |
+| **Planner**            | View events linked to specific cards                  |
+
+We'll update this page as new capabilities become available.
+
 ## Data and security
 
 * **Authentication** - Trello MCP uses OAuth 2.0 for secure authentication and access control.
@@ -140,42 +177,6 @@ Once connected, you can ask your AI assistant to perform a variety of tasks.
 
 * "Pull every Trello card I marked as done over the last year and write a recap I can use in my annual performance review."
 * "Review the tasks on my wedding planning board and add anything missing."
-
-## Supported capabilities
-
-| Category             | What you can do                                                                    |
-| -------------------- | ---------------------------------------------------------------------------------- |
-| **Member**     | View your profile and defaults                                                     |
-| **Workspaces** | View workspace details                                                             |
-| **Boards**     | View and create boards; view labels                                                |
-| **Lists**      | View and move lists                                                                |
-| **Cards**      | View, create, update, move, archive, and mark cards done; attach and detach labels |
-| **Checklists** | View, create, and update checklists; add and update checklist items                |
-| **Search**     | Search for cards and boards by keyword                                             |
-| **Planner**    | View calendar events; create focus-time events; link and unlink cards to events    |
-| **Inbox**      | View, create, update, and archive Inbox cards                                      |
-
-**Planner and focus time**
-
-Users can connect their Google or Outlook calendar to Planner to read calendar events. However, creating focus time in Planner requires Trello Premium or enterprise.
-
-## More capabilities coming soon
-
-Trello MCP is actively being developed. The current release includes core tools for managing boards, lists, cards, checklists, and search. Additional tools are planned for upcoming releases to expand what your AI assistant can do with Trello:
-
-| Category                     | What's coming                                         |
-| ---------------------------- | ----------------------------------------------------- |
-| **Activity & History** | View action history for cards, lists, and boards      |
-| **Comments**           | View, add, and edit comments on cards                 |
-| **Attachments**        | View, upload, and download card attachments           |
-| **Custom Fields**      | View field definitions; get and set values on cards   |
-| **Labels**             | Create, view, and update labels                       |
-| **Boards**             | Edit board details (name, visibility); archive boards |
-| **Cards**              | Copy cards                                            |
-| **Members**            | View and manage board, workspace, and card members    |
-| **Planner**            | View events linked to specific cards                  |
-
-We'll update this page as new capabilities become available.
 
 ## Trello MCP vs. Atlassian Rovo MCP
 
