@@ -1,6 +1,6 @@
 ---
 name: trello-use
-description: "**MANDATORY prerequisite** — load this BEFORE calling any Trello MCP tool (`trelloRead*`, `trelloWrite*`, `trelloSearch`). Covers the ARI id format every tool requires and the cross-cutting rules (current-user lookup, UTC date handling, Inbox vs boards, ordered creation, pagination). Skipping it causes malformed-id errors and wrong due-date/timezone results."
+description: "**MANDATORY prerequisite** — load this BEFORE calling any Trello MCP tool (`trelloRead*`, `trelloWrite*`, `trelloSearch`). Covers the ARI id format every tool requires and the cross-cutting rules (current-user lookup, UTC date handling, Inbox vs boards, ordered creation, pagination, and embedded-field previews vs full `list_*` records). Skipping it causes malformed-id errors, wrong due-date/timezone results, and answers built on truncated data."
 disable-model-invocation: false
 ---
 
@@ -80,3 +80,23 @@ All three can be issued in parallel — `pos` is per board, and distinct values 
 ## 6. Pagination
 
 Read tools that list collections use cursor pagination (`cursor` in, `pageInfo.endCursor`/`nextCursor` + `hasNextPage`/`hasMore` out). Keep paginating while `hasNextPage`/`hasMore` is true instead of assuming the first page is complete — this matters especially for `trelloReadBoard` `list`/`list_by_workspace` when filtering by `visibility` (filtered server-side per page, not globally before pagination).
+
+## 7. Embedded fields are previews
+
+Fields that nest child objects — `lists` on a board, `labels`/`comments` on a card, `cards` on a list — are capped previews, in `get` and `list_*` responses alike. `<field>HasMore: true` marks one as truncated: `listsHasMore`, `labelsHasMore`, `checklistsHasMore`, `commentsHasMore`.
+
+A count, "all X", filtering, or "is that everything?" needs every child. Fetch them with the matching action, paginate until a response reports no next page (§6), and answer from those pages.
+
+| Children you need in full | Fetch with |
+|---|---|
+| a board's lists | `trelloReadList` `list_by_board` |
+| a list's cards | `trelloReadCard` `list_by_list` |
+| a card's checklists and their items | `trelloReadChecklist` `list_by_card` |
+| a board's labels | `trelloReadBoard` `list_labels` |
+| a card's comments | `trelloReadCard` `list_comments` — **gated**: when it is absent from the advertised actions, comments are unavailable; say that plainly |
+| a card's own labels or members | no card-scoped action exists — the preview is the ceiling, so present it as partial |
+
+**Example — "how many lists does this board have?"** `trelloReadBoard` `get` returns `lists` with `listsHasMore: true`. Take the board ARI from that response to the list action, follow the cursor to the last page, then count what you collected:
+```json
+{ "tool": "trelloReadList", "action": "list_by_board", "boardId": "ari:cloud:trello::board/workspace/<workspaceObjectId>/<boardObjectId>", "cursor": "<endCursor/nextCursor from the previous page>" }
+```
