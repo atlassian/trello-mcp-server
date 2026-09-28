@@ -7,7 +7,7 @@
     "name": "Atlassian",
     "url": "https://atlassian.com"
   },
-  "homepage": "https://github.com/atlassian/trello-mcp-server",
+  "homepage": "https://trello.com/mcp",
   "repository": "https://github.com/atlassian/trello-mcp-server",
   "license": "Apache-2.0",
   "keywords": ["trello", "atlassian", "mcp", "boards", "cards", "skills"],
