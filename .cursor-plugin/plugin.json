@@ -1,0 +1,17 @@
+{
+  "name": "trello",
+  "displayName": "Trello MCP",
+  "description": "Official Trello plugin for Cursor with the Trello MCP server and a skill for boards, lists, cards, checklists, Inbox, and Planner.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Atlassian",
+    "url": "https://atlassian.com"
+  },
+  "homepage": "https://github.com/atlassian/trello-mcp-server",
+  "repository": "https://github.com/atlassian/trello-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": ["trello", "atlassian", "mcp", "boards", "cards", "skills"],
+  "logo": "images/Trello_logo_light.svg",
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json"
+}
