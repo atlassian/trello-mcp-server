@@ -63,7 +63,10 @@ Ensure your environment meets the necessary requirements to successfully connect
 
 **For Cursor users:** Click this [deeplink](https://cursor.com/install-mcp?name=trello&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vbWNwLnRyZWxsby5jb20vdjEifQ==) to open Cursor and install Trello MCP.
 
-**For Antigravity users:** Run `agy plugin install https://github.com/atlassian/trello-mcp-server` to install the Trello plugin, which includes Trello MCP and the Trello skill. You can also install it from the Antigravity Marketplace when the listing is live.
+**For Antigravity users:** Install the Trello plugin, which includes Trello MCP and the Trello skill:
+
+* **Antigravity App:** Open **Customizations** > **Marketplace** and install Trello when the listing is live. You can also put a copy of this repository in `~/.gemini/config/plugins/trello/`.
+* **Antigravity CLI:** Run `agy plugin install https://github.com/atlassian/trello-mcp-server`.
 
 Listing on other AI platform marketplaces may become available over time. Until then, you can connect by manually adding the MCP URL in your AI client.
 
