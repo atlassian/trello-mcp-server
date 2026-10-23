@@ -1,5 +1,21 @@
 {
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "trello",
-  "description": "Official Trello plugin with the Trello MCP server and a skill for boards, lists, cards, checklists, Inbox, and Planner."
+  "displayName": "Trello",
+  "description": "Official Trello plugin with the Trello MCP server and a skill for boards, lists, cards, checklists, Inbox, and Planner.",
+  "version": "0.1.0",
+  "logo": "images/Trello_logo_light.svg",
+  "suggestedPrompts": [
+    "Summarize the cards that are due this week across my Trello boards.",
+    "Create a Trello card on my board for each TODO in this file.",
+    "Show what is in my Trello Inbox and suggest a board and list for each card."
+  ],
+  "author": {
+    "name": "Atlassian",
+    "url": "https://atlassian.com"
+  },
+  "homepage": "https://trello.com/mcp",
+  "repository": "https://github.com/atlassian/trello-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": ["trello", "atlassian", "mcp", "boards", "cards", "kanban", "project management"]
 }
