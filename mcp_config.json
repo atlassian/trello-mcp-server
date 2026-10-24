@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "trello": {
+      "serverUrl": "https://mcp.trello.com/v1"
+    }
+  }
+}
