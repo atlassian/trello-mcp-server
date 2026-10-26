@@ -41,6 +41,7 @@ Trello MCP supports any app with MCP support, including:
 * [Cursor](https://cursor.com/docs/mcp#installing-mcp-servers)
 * [Visual Studio Code](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server)
 * [Google Gemini CLI](https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md)
+* [Google Antigravity](https://antigravity.google/docs/plugins)
 
 For setup details, refer to your AI client's MCP documentation or built-in instructions.
 
@@ -61,6 +62,11 @@ Ensure your environment meets the necessary requirements to successfully connect
 **For Claude users:** Add Trello MCP from our [listing page](https://claude.ai/directory/connectors/trello).
 
 **For Cursor users:** Click this [deeplink](https://cursor.com/install-mcp?name=trello&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vbWNwLnRyZWxsby5jb20vdjEifQ==) to open Cursor and install Trello MCP.
+
+**For Antigravity users:** Install the Trello plugin, which includes Trello MCP and the Trello skill:
+
+* **Antigravity App:** Open **Customizations** > **Marketplace** and install Trello when the listing is live. You can also put a copy of this repository in `~/.gemini/config/plugins/trello/`.
+* **Antigravity CLI:** Run `agy plugin install https://github.com/atlassian/trello-mcp-server`.
 
 Listing on other AI platform marketplaces may become available over time. Until then, you can connect by manually adding the MCP URL in your AI client.
 
