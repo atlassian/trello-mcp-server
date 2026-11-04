@@ -182,3 +182,5 @@ A count, "all X", filtering, or "is that everything?" needs every child. Fetch t
 A card URL is enough to read, but a write needs the ARI, so read the card first and take its `id`.
 
 `add_comment` returns the new comment's id as a bare object id (`commentId`), and `update_comment` rejects that form. Prefix it to get the ARI (`ari:cloud:trello::action/<commentId>`), which is the form `list_comments` returns.
+
+**Card write responses leave out comments and checklists.** `update`, `move`, `mark_done` and `add_comment` on `trelloWriteCard` return the card with `comments: []`, `checklists: []` and `commentsHasMore: false`, even when the card has both. `add_comment` also returns `null` for most other fields. Those empty arrays say nothing about what is on the card, and the write did not remove anything. Don't re-read the card to check that comments survived; read it (`trelloReadCard` `get`) only when the user needs the current comments or checklists.
