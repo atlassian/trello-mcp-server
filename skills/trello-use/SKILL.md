@@ -160,7 +160,7 @@ A count, "all X", filtering, or "is that everything?" needs every child. Fetch t
 
 ## 8. Calls that are easy to get wrong
 
-**Every card on a board in one call:** `trelloReadCard` `list_by_board` with `boardIdOrUrl`. The response is a flat `cards.nodes` array, not grouped; each card carries its `list` (`id`, `name`), so group client-side if the user wants columns. `limit` counts lists per page (default 5, max 50), not cards, and every list on the page returns all of its cards, so a busy board gives a very large response. Keep `limit` small and follow `pageInfo.endCursor` while `pageInfo.hasNextPage` is true (§6). `trelloReadList` `list_by_board` returns the lists only, with no cards, so it is the wrong first call for "show me the board".
+**Every card on a board in one call:** `trelloReadCard` `list_by_board` with `boardIdOrUrl`. The response is a flat `cards.nodes` array, not grouped; each card carries its `list` (`id`, `name`), so group client-side if the user wants columns. `limit` counts lists per page (default 5, max 50), not cards, and every list on the page returns all of its cards, so a busy board gives a very large response. Keep `limit` small and follow `pageInfo.endCursor` while `pageInfo.hasNextPage` is true (§6); the final page can be empty. `trelloReadList` `list_by_board` returns the lists only, with no cards, so it is the wrong first call for "show me the board".
 
 ```json
 { "tool": "trelloReadCard", "action": "list_by_board", "boardIdOrUrl": "ari:cloud:trello::board/workspace/<workspaceObjectId>/<boardObjectId>", "limit": 2 }
@@ -180,3 +180,5 @@ A count, "all X", filtering, or "is that everything?" needs every child. Fetch t
 ```
 
 A card URL is enough to read, but a write needs the ARI, so read the card first and take its `id`.
+
+`add_comment` returns the new comment's id as a bare object id (`commentId`), and `update_comment` rejects that form. Prefix it to get the ARI (`ari:cloud:trello::action/<commentId>`), which is the form `list_comments` returns.
