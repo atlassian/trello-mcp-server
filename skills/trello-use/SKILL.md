@@ -157,3 +157,26 @@ A count, "all X", filtering, or "is that everything?" needs every child. Fetch t
   "cursor": "<endCursor/nextCursor from the previous page>"
 }
 ```
+
+## 8. Calls that are easy to get wrong
+
+**Every card on a board in one call:** `trelloReadCard` `list_by_board` with `boardIdOrUrl`. The response is a flat `cards.nodes` array, not grouped; each card carries its `list` (`id`, `name`), so group client-side if the user wants columns. Page with `pageInfo.endCursor` while `pageInfo.hasNextPage` is true (§6). `trelloReadList` `list_by_board` returns the lists only, with no cards, so it is the wrong first call for "show me the board".
+
+```json
+{ "tool": "trelloReadCard", "action": "list_by_board", "boardIdOrUrl": "ari:cloud:trello::board/workspace/<workspaceObjectId>/<boardObjectId>", "limit": 50 }
+```
+
+**Comments:** `trelloWriteCard` handles writing, `trelloReadCard` handles reading, and the two name the card param differently (§2).
+
+| Goal | Call |
+|---|---|
+| Post a comment | `trelloWriteCard` `add_comment` with `cardId` (ARI) and `text` |
+| Edit a comment | `trelloWriteCard` `update_comment` with `cardId` (ARI), `commentId` (ARI) and `text` (the replacement) |
+| List comments | `trelloReadCard` `list_comments` with `cardIdOrUrl` |
+| Read one comment | `trelloReadCard` `get_comment` with `cardIdOrUrl` (an ARI here, not a URL) and `commentId` |
+
+```json
+{ "tool": "trelloWriteCard", "action": "add_comment", "cardId": "ari:cloud:trello::card/workspace/<workspaceObjectId>/<cardObjectId>", "text": "Deployed to staging." }
+```
+
+A card URL is enough to read, but a write needs the ARI, so read the card first and take its `id`.
