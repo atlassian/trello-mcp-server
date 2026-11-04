@@ -14,7 +14,7 @@ Call `trelloReadMember` with `action: "get_me"` to get the authenticated user's 
 
 ## 2. ARI id format (critical — read before passing any id)
 
-Every id-typed parameter (`cardId`, `boardId`, `listId`, `workspaceId`, `checklistId`, `itemId`, `labelId`, `plannerCalendarId`, `providerAccountId`) is an ARI, not a raw Trello object id. Most are workspace-scoped and follow this shape:
+Every id-typed parameter (`cardId`, `cardIdOrUrl`, `boardId`, `boardIdOrUrl`, `listId`, `workspaceId`, `checklistId`, `itemId`, `labelId`, `plannerCalendarId`, `providerAccountId`) is an ARI, not a raw Trello object id. Most are workspace-scoped and follow this shape:
 
 ```
 ari:cloud:trello::<entity>/workspace/<workspaceObjectId>/<entityObjectId>
@@ -39,7 +39,14 @@ The exceptions (last four rows below) are not workspace-scoped: action, member, 
 Rules:
 
 - **Always get the ARI from a read tool first**, never construct or guess one. `trelloWriteCard`, `trelloWriteChecklist`, `trelloWriteInbox`, and `trelloWritePlanner` all reject Trello URLs/short links on their id params ("Do NOT pass a Trello URL or short link; use `trelloReadCard`/`trelloReadInbox` first to obtain the ARI").
-- **Two read `get` actions also accept a plain Trello URL**, as a convenience: `trelloReadBoard` (`get`) takes a board URL (`https://trello.com/b/<shortLink>/...`) and `trelloReadCard` (`get`) takes a card URL (`.../c/<shortLink>/...`), in addition to an ARI. Every other tool — and all write tools — take ARIs only.
+- **Some reads also accept a plain Trello URL.** `trelloReadCard` takes a card URL (`.../c/<shortLink>/...`) for every action except `get_comment`, and a board URL for `list_by_board`. `trelloReadBoard` takes a board URL for `get` and `list_activity` only. Every other tool, and all write tools, take ARIs only.
+- **`trelloReadCard` names its id params differently from every other tool.** It uses `cardIdOrUrl` and `boardIdOrUrl`, not `cardId` / `boardId`. Passing `cardId` fails with `requires "cardIdOrUrl"`. `listId` and `commentId` keep their plain names.
+
+```json
+{ "tool": "trelloReadCard", "action": "get", "cardIdOrUrl": "https://trello.com/c/<shortLink>/<slug>" }
+{ "tool": "trelloReadCard", "action": "list_by_board", "boardIdOrUrl": "ari:cloud:trello::board/workspace/<workspaceObjectId>/<boardObjectId>" }
+{ "tool": "trelloReadChecklist", "action": "list_by_card", "cardId": "ari:cloud:trello::card/workspace/<workspaceObjectId>/<cardObjectId>" }
+```
 
 ## 3. Dates are always UTC ISO 8601
 
