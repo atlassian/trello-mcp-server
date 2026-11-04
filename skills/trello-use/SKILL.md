@@ -14,7 +14,7 @@ Call `trelloReadMember` with `action: "get_me"` to get the authenticated user's 
 
 ## 2. ARI id format (critical — read before passing any id)
 
-Every id-typed parameter (`cardId`, `boardId`, `listId`, `workspaceId`, `checklistId`, `itemId`, `labelId`, `plannerCalendarId`, `providerAccountId`) is an ARI, not a raw Trello object id. Most are workspace-scoped and follow this shape:
+Every id-typed parameter (`cardId`, `cardIdOrUrl`, `boardId`, `boardIdOrUrl`, `listId`, `workspaceId`, `checklistId`, `itemId`, `labelId`, `plannerCalendarId`, `providerAccountId`) is an ARI, not a raw Trello object id. Most are workspace-scoped and follow this shape:
 
 ```
 ari:cloud:trello::<entity>/workspace/<workspaceObjectId>/<entityObjectId>
@@ -39,7 +39,14 @@ The exceptions (last four rows below) are not workspace-scoped: action, member, 
 Rules:
 
 - **Always get the ARI from a read tool first**, never construct or guess one. `trelloWriteCard`, `trelloWriteChecklist`, `trelloWriteInbox`, and `trelloWritePlanner` all reject Trello URLs/short links on their id params ("Do NOT pass a Trello URL or short link; use `trelloReadCard`/`trelloReadInbox` first to obtain the ARI").
-- **Two read `get` actions also accept a plain Trello URL**, as a convenience: `trelloReadBoard` (`get`) takes a board URL (`https://trello.com/b/<shortLink>/...`) and `trelloReadCard` (`get`) takes a card URL (`.../c/<shortLink>/...`), in addition to an ARI. Every other tool — and all write tools — take ARIs only.
+- **Some reads also accept a plain Trello URL.** `trelloReadCard` takes a card URL (`.../c/<shortLink>/...`) for every action except `get_comment`, and a board URL for `list_by_board`. `trelloReadBoard` takes a board URL for `get` and `list_activity` only. Every other tool, and all write tools, take ARIs only.
+- **`trelloReadCard` names its id params differently from every other tool.** It uses `cardIdOrUrl` and `boardIdOrUrl`, not `cardId` / `boardId`. Passing `cardId` fails with `requires "cardIdOrUrl"`. `listId` and `commentId` keep their plain names.
+
+```json
+{ "tool": "trelloReadCard", "action": "get", "cardIdOrUrl": "https://trello.com/c/<shortLink>/<slug>" }
+{ "tool": "trelloReadCard", "action": "list_by_board", "boardIdOrUrl": "ari:cloud:trello::board/workspace/<workspaceObjectId>/<boardObjectId>" }
+{ "tool": "trelloReadChecklist", "action": "list_by_card", "cardId": "ari:cloud:trello::card/workspace/<workspaceObjectId>/<cardObjectId>" }
+```
 
 ## 3. Dates are always UTC ISO 8601
 
@@ -150,3 +157,30 @@ A count, "all X", filtering, or "is that everything?" needs every child. Fetch t
   "cursor": "<endCursor/nextCursor from the previous page>"
 }
 ```
+
+## 8. Calls that are easy to get wrong
+
+**Every card on a board in one call:** `trelloReadCard` `list_by_board` with `boardIdOrUrl`. The response is a flat `cards.nodes` array, not grouped; each card carries its `list` (`id`, `name`), so group client-side if the user wants columns. `limit` counts lists per page (default 5, max 50), not cards, and every list on the page returns all of its cards, so a busy board gives a very large response. Keep `limit` small and follow `pageInfo.endCursor` while `pageInfo.hasNextPage` is true (§6); the final page can be empty. `trelloReadList` `list_by_board` returns the lists only, with no cards, so it is the wrong first call for "show me the board".
+
+```json
+{ "tool": "trelloReadCard", "action": "list_by_board", "boardIdOrUrl": "ari:cloud:trello::board/workspace/<workspaceObjectId>/<boardObjectId>", "limit": 2 }
+```
+
+**Comments:** `trelloWriteCard` handles writing, `trelloReadCard` handles reading, and the two name the card param differently (§2).
+
+| Goal | Call |
+|---|---|
+| Post a comment | `trelloWriteCard` `add_comment` with `cardId` (ARI) and `text` |
+| Edit a comment | `trelloWriteCard` `update_comment` with `cardId` (ARI), `commentId` (ARI) and `text` (the replacement) |
+| List comments | `trelloReadCard` `list_comments` with `cardIdOrUrl` |
+| Read one comment | `trelloReadCard` `get_comment` with `cardIdOrUrl` (an ARI here, not a URL) and `commentId` |
+
+```json
+{ "tool": "trelloWriteCard", "action": "add_comment", "cardId": "ari:cloud:trello::card/workspace/<workspaceObjectId>/<cardObjectId>", "text": "Deployed to staging." }
+```
+
+A card URL is enough to read, but a write needs the ARI, so read the card first and take its `id`.
+
+`add_comment` returns the new comment's id as a bare object id (`commentId`), and `update_comment` rejects that form. Prefix it to get the ARI (`ari:cloud:trello::action/<commentId>`), which is the form `list_comments` returns.
+
+**Card write responses leave out comments and checklists.** `update`, `move`, `mark_done` and `add_comment` on `trelloWriteCard` return the card with `comments: []`, `checklists: []` and `commentsHasMore: false`, even when the card has both. `add_comment` also returns `null` for most other fields. Those empty arrays say nothing about what is on the card, and the write did not remove anything. Don't re-read the card to check that comments survived; read it (`trelloReadCard` `get`) only when the user needs the current comments or checklists.
